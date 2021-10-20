@@ -1,4 +1,4 @@
-require 'digest/whirlpool'
+require 'digest'
 require 'mechanize'
 
 def numConsonantGen(maxlength)
@@ -7,10 +7,10 @@ def numConsonantGen(maxlength)
 	return string
 end
 
-def whirlGen(maxlength)
+def shaGen(maxlength)
 	holdabc = [('a'..'z'), ('A'..'Z'), (0..9)].map(&:to_a).flatten
 	string = (0..27).map { holdabc[rand(holdabc.length)] }.join
-	stringwhirled = Digest::Whirlpool.hexdigest(string)
+	stringwhirled = Digest::SHA512.hexdigest(string)
 	return stringwhirled[0..maxlength]
 end
 
