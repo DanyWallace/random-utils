@@ -5,19 +5,19 @@
 
 require 'mechanize'
 require 'httparty'
+require 'digest'
 
 # random generatos -------------------------------------------
 #------------------------------------------------------------
 
-def whirlgen(maxlength = 11)
-  require 'digest/whirlpool'
+def shagen(maxlength = 11)
   
   @maxlength = maxlength # max size is actually 128 until idk
   @maxlength = ARGV[1].to_i if ARGV[1]
   holdabc = [('a'..'z'), ('A'..'Z'), (0..9)].map(&:to_a).flatten
   string = (0..27).map { holdabc[rand(holdabc.length)] }.join
-  stringwhirled = Digest::Whirlpool.hexdigest(string)
-  puts stringwhirled[0..@maxlength - 1]
+  stringsha512 = Digest::SHA512.hexdigest(string)
+  puts stringsha512[0..@maxlength - 1]
 end
 
 def truerandom(maxlength = 15)
