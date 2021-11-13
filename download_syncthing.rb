@@ -11,11 +11,9 @@ syncthing_site_html.each_line do |line|
 end
 
 dl = "wget #{syncthing_link}"
-extract = "mkdir syncthing && tar xvf #{ syncthing_file } --directory syncthing/."
+extract = "tar xvf #{ syncthing_file } && mv syncthing*gz /tmp/. && mv syncthing* syncthing"
 install = "mv syncthing #{ENV['HOME']}/cannon/bin/." 
-move = "mv #{syncthing_file} /tmp/."
 
 puts `#{dl}`
 puts `#{extract}`
 puts `#{install}`
-puts `#{move}`
